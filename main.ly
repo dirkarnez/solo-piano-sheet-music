@@ -14,16 +14,24 @@
 
      (/ myStaffSize 20)))
 }
+
+\version "2.22.1"
+
 \header {
   title = "Song Name here"
   composer = "by Kawing Chan"
   meter = "moderato"
   tagline = \markup {
-      \center-column {
-        "Copyright © 2021 Kawing Chan"
-        "Please respect Kawing's copyright and do not share, trade or distribute this PDF file on the Internet."
-        "Doing so is against the artist's wishes and is a copyright violation. Thank you."
-    }
+    \tiny
+    \center-column { 
+       "Copyright © 2021 Kawing Chan" 
+      \vspace #-0.3
+      "Please respect Kawing's copyright and do not share, trade or distribute this PDF file on the Internet." 
+      \vspace #-0.3
+      "Doing so is against the artist's wishes and is a copyright violation. Thank you." 
+      \vspace #-0.3
+      \with-url #"https://lilypond.org/" { \italic "https://lilypond.org/" }
+    } 
   }
 }
 
@@ -33,6 +41,10 @@ upper = \relative c'' {
   \numericTimeSignature
   \time 4/4
   a4 b c d
+  a4 b c d
+  a4 b c e
+  a4 b c d
+  a4 b c d
 }
 
 lower = \relative c {
@@ -40,17 +52,25 @@ lower = \relative c {
   \key c \major
   \numericTimeSignature
   \time 4/4
-  a2 c
+  \set Staff.pedalSustainStyle = #'mixed
+  \sustainOn c4 d e f 
+  g1 \sustainOff \sustainOn
+  a \sustainOff \sustainOn
+  \once \override Staff.PianoPedalBracket.edge-height = #'(1 . 0)
+  \once \override Staff.PianoPedalBracket.pedal-text = #'hi
+  g4 \sustainOff \sustainOn f \sustainOff_\markup { \tiny \lower #3.21 \italic  "  (ped. simile)" } e d 
+  c1
 }
 
 \score {
   \new PianoStaff <<
     \new Staff \upper
     \new Staff \lower
-  >>
-\layout {
-    short-indent = 2\cm
-    indent = 3\cm
-}
+  >>  
+  %  \pageBreak
+  \layout {
+      short-indent = 2\cm
+      indent = 3\cm
+  }
   \midi { }
 }
