@@ -19,7 +19,7 @@ jobs:
       - name: lilypond
         shell: cmd
         run: |
-          curl https://gitlab.com/lilypond/lilypond/-/releases/v2.24.4/downloads/lilypond-2.24.4-mingw-x86_64.zip --output setup.zip &&^ 
+          curl "https://gitlab.com/lilypond/lilypond/-/releases/v2.24.4/downloads/lilypond-2.24.4-mingw-x86_64.zip" --output setup.zip &&^
           7z x setup.zip &&^
           cd lilypond-2.24.4 &&^
           dir
